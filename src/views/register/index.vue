@@ -47,34 +47,19 @@
 </template>
 
 <script>
-import { validUsername } from '@/utils/validate'
-import { successMessage, infoMessage, errorMessage, MessageBoxAlert, MessageBoxCofirm } from '@/utils/message'
+import { errorMessage, MessageBoxAlert } from '@/utils/message'
 
 export default {
   name: 'Login',
   data() {
-    const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
-        callback()
-      } else {
-        callback()
-      }
-    }
-    const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
-      } else {
-        callback()
-      }
-    }
     return {
       loginForm: {
         username: 'admin',
         password: '111111'
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
       },
       loading: false,
       passwordType: 'password',
@@ -100,8 +85,7 @@ export default {
         this.$refs.password.focus()
       })
     },
-    handleLogin(){
-      console.log("11")
+    handleLogin() {
       this.$router.push({ path: '/login' })
     },
     handleRegister() {
@@ -109,13 +93,13 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          let data=this.loginForm
-          this.Axios.put("/auth/register",data).then((response) => {
+          const data = this.loginForm
+          this.Axios.put('/auth/register', data).then((response) => {
             this.loading = false
-            MessageBoxAlert("注册成功").then(() => {
+            MessageBoxAlert('注册成功').then(() => {
               this.$router.push({ path: '/login' })
             })
-          }).catch((error)=> {
+          }).catch((error) => {
             this.loading = false
             errorMessage(error.data)
           })

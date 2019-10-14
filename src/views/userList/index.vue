@@ -37,7 +37,7 @@
         />
         <el-table-column label="头像" align="center" width="150">
           <template slot-scope="scope">
-            <img :src="scope.row.head_image" >
+            <img :src="scope.row.head_image">
           </template>
         </el-table-column>
         <el-table-column label="操作" align="center" width="150">
@@ -62,7 +62,7 @@ export default {
   data() {
     return {
       list: null,
-      tableData:[],
+      tableData: [],
       listLoading: true
     }
   },
@@ -72,17 +72,17 @@ export default {
   methods: {
     fetchData() {
       this.Axios.get(`/auth/userinfo/list`, null).then((response) => {
-          this.tableData=response.data
+        this.tableData = response.data
       }).catch(function(error) {
-          errorMessage(error.message)
+        errorMessage(error.message)
       })
     },
-    handleDelete(index, row){
+    handleDelete(index, row) {
       console.log(row)
-      let data={
-        username:row.username
+      const data = {
+        username: row.username
       }
-      MessageBoxCofirm("请确认是否删除用户", 'warning').then(() => {
+      MessageBoxCofirm('请确认是否删除用户', 'warning').then(() => {
         this.Axios.post(`/auth/delete`, data).then((response) => {
           successMessage('删除成功')
           this.fetchData()
@@ -90,9 +90,9 @@ export default {
           errorMessage(error.msg)
         })
       })
-      .catch(() => {
-        infoMessage('已取消删除')
-      })
+        .catch(() => {
+          infoMessage('已取消删除')
+        })
     }
   }
 }
@@ -102,5 +102,4 @@ img{
   max-width:50px;
 }
 </style>
-
 

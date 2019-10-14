@@ -7,12 +7,11 @@ export function httpUrl() {
   return 'http://47.92.164.250:3000'
 }
 
-
 export function getToken(token) {
   return Cookies.get(token)
 }
 
-export function setToken(TokenKey,token) {
+export function setToken(TokenKey, token) {
   return Cookies.set(TokenKey, token)
 }
 

@@ -1,7 +1,7 @@
 import Axios from 'axios'
 import qs from 'qs'
-import { Message, Loading } from 'element-ui'
-import { getToken, httpUrl } from '@/utils/auth' // get token from cookie
+import { Loading } from 'element-ui'
+import { httpUrl } from '@/utils/auth' // get token from cookie
 
 let loading // 定义loading变量
 
@@ -43,7 +43,7 @@ Axios.interceptors.request.use(
     if (config.method === 'post') {
       // config.data = qs.stringify(config.data)
       config.headers = {
-        'Content-Type': 'application/json;charset=UTF-8',
+        'Content-Type': 'application/json;charset=UTF-8'
       }
     } else if (config.method === 'get') {
       const newParams = {}
@@ -52,7 +52,7 @@ Axios.interceptors.request.use(
       }
       config.params = newParams
       config.headers = {
-        'Content-Type': 'application/json;charset=UTF-8',
+        'Content-Type': 'application/json;charset=UTF-8'
       }
     } else {
       return config
