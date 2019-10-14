@@ -49,35 +49,20 @@
 </template>
 
 <script>
-import { validUsername } from '@/utils/validate'
 import { setToken } from '@/utils/auth' // get token from cookie
-import { successMessage, infoMessage, errorMessage, MessageBoxAlert, MessageBoxCofirm } from '@/utils/message'
+import { errorMessage } from '@/utils/message'
 
 export default {
   name: 'Login',
   data() {
-    const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
-      } else {
-        callback()
-      }
-    }
-    const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
-      } else {
-        callback()
-      }
-    }
     return {
       loginForm: {
         username: 'admin',
         password: '111111'
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
       },
       loading: false,
       passwordType: 'password',
@@ -106,15 +91,16 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          let data=this.loginForm
+          const data = this.loginForm
           this.loading = true
-          this.Axios.post("/auth/login",data).then((response) => {
+          console.log(this.loginForm)
+          this.Axios.post('/auth/login', data).then((response) => {
             this.loading = false
-            setToken("username",response.data.username)
+            setToken('username', response.data.username)
             global.head_image = response.data.head_image
             console.log(response)
             this.$router.push({ path: '/' })
-          }).catch((error)=> {
+          }).catch((error) => {
             this.loading = false
             errorMessage(error.data)
           })
@@ -124,8 +110,7 @@ export default {
         }
       })
     },
-    handleRegister(){
-      console.log("11")
+    handleRegister() {
       this.$router.push({ path: '/register' })
     }
   }

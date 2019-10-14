@@ -52,7 +52,7 @@ export default {
       this.$store.dispatch('app/toggleSideBar')
     },
     async logout() {
-      removeToken("username")
+      removeToken('username')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     }
   }
