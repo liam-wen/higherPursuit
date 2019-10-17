@@ -100,6 +100,7 @@ export default {
       form.append('username', getToken('username'))
       this.Axios.post(`/auth/userinfo/headimage/update`, form).then((response) => {
         this.form.head_image = response.data.head_image
+        global.avater = response.data.head_image
       }).catch(function(error) {
         errorMessage(error.message)
       })

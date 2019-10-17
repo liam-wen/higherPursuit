@@ -19,7 +19,7 @@
 
 <script>
 import { getToken } from '@/utils/auth' // get token from cookie
-import { successMessage, infoMessage, errorMessage, MessageBoxAlert, MessageBoxCofirm } from '@/utils/message'
+import { successMessage, errorMessage } from '@/utils/message'
 import qs from 'qs'
 
 export default {
@@ -71,7 +71,6 @@ export default {
       const fileObj = param.file
       // FormData 对象
       const form = new FormData()
-      const type = param.filename
       // 文件对象
       form.append('file', fileObj)
       form.append('username', getToken('username'))

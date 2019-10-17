@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { successMessage, infoMessage, errorMessage, MessageBoxAlert, MessageBoxCofirm } from '@/utils/message'
+import { successMessage, infoMessage, errorMessage, MessageBoxCofirm } from '@/utils/message'
 
 export default {
   data() {
