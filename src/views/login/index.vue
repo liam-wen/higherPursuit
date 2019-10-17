@@ -93,12 +93,11 @@ export default {
         if (valid) {
           const data = this.loginForm
           this.loading = true
-          console.log(this.loginForm)
           this.Axios.post('/auth/login', data).then((response) => {
             this.loading = false
             setToken('username', response.data.username)
+            setToken('avatr', response.data.head_image)
             global.head_image = response.data.head_image
-            console.log(response)
             this.$router.push({ path: '/' })
           }).catch((error) => {
             this.loading = false

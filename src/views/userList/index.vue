@@ -78,7 +78,6 @@ export default {
       })
     },
     handleDelete(index, row) {
-      console.log(row)
       const data = {
         username: row.username
       }

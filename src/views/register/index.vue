@@ -89,7 +89,6 @@ export default {
       this.$router.push({ path: '/login' })
     },
     handleRegister() {
-      console.log(this)
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
