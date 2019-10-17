@@ -96,8 +96,7 @@ export default {
           this.Axios.post('/auth/login', data).then((response) => {
             this.loading = false
             setToken('username', response.data.username)
-            setToken('avatr', response.data.head_image)
-            global.head_image = response.data.head_image
+            global.avater = response.data.head_image
             this.$router.push({ path: '/' })
           }).catch((error) => {
             this.loading = false

@@ -8,7 +8,7 @@
       <div class="avatar-container">
         <div class="avatar-wrapper">
           <img :src="avatar" class="user-avatar" @error="imgLoadError()">
-          <span class="name">{{name}}</span>
+          <span class="name">{{ name }}</span>
           <!-- <i class="el-icon-caret-bottom" /> -->
           <i class="el-icon-switch-button" @click="logout()" />
         </div>
@@ -28,16 +28,24 @@ export default {
     Breadcrumb,
     Hamburger
   },
+  data() {
+    return {
+      avatar: global.avater,
+      name: getToken('username')
+    }
+  },
   computed: {
     ...mapGetters([
       'sidebar'
     ])
   },
-  data(){
-    return {
-      avatar:getToken("avatr"),
-      name:getToken("username")
+  watch: {
+    $route() {
+      this.avatar = global.avater
     }
+  },
+  created() {
+    console.log(global.avater)
   },
   methods: {
     toggleSideBar() {
@@ -47,9 +55,10 @@ export default {
       removeToken('username')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     },
-    imgLoadError () {
-        this.avatar="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80"
- 　　}
+    imgLoadError() {
+      console.log(global.avater)
+      this.avatar = 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80'
+    }
   }
 }
 </script>
