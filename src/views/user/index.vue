@@ -31,7 +31,6 @@
 </template>
 
 <script>
-import { getToken } from '@/utils/auth' // get token from cookie
 import { successMessage, errorMessage } from '@/utils/message'
 import qs from 'qs'
 
@@ -84,9 +83,9 @@ export default {
       })
     },
     getUserInfo() {
-      this.Axios.get(`/auth/userinfo?username=${getToken('username')}`, null).then((response) => {
+      this.Axios.get(`/auth/userinfo?username=${sessionStorage.getItem('username')}`, null).then((response) => {
         this.form = response.data
-        global.head_image = response.data.head_image
+        global.avater = response.data.head_image
       }).catch(function(error) {
         errorMessage(error.message)
       })
@@ -97,7 +96,7 @@ export default {
       const form = new FormData()
       // 文件对象
       form.append('file', fileObj)
-      form.append('username', getToken('username'))
+      form.append('username', sessionStorage.getItem('username'))
       this.Axios.post(`/auth/userinfo/headimage/update`, form).then((response) => {
         this.form.head_image = response.data.head_image
         global.avater = response.data.head_image

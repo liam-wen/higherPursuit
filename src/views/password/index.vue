@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import { getToken } from '@/utils/auth' // get token from cookie
 import { successMessage, errorMessage } from '@/utils/message'
 import qs from 'qs'
 
@@ -36,7 +35,7 @@ export default {
     }
     return {
       form: {
-        username: getToken('username'),
+        username: sessionStorage.getItem('username'),
         nickname: '',
         description: ''
       },
@@ -73,7 +72,7 @@ export default {
       const form = new FormData()
       // 文件对象
       form.append('file', fileObj)
-      form.append('username', getToken('username'))
+      form.append('username', sessionStorage.getItem('username'))
       this.Axios.post(`/auth/userinfo/headimage/update`, form).then((response) => {
         this.form.head_image = response.data.head_image
       }).catch(function(error) {

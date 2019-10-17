@@ -21,7 +21,6 @@
 import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
-import { getToken, removeToken } from '@/utils/auth' // get token from cookie
 
 export default {
   components: {
@@ -31,7 +30,7 @@ export default {
   data() {
     return {
       avatar: global.avater,
-      name: getToken('username')
+      name: sessionStorage.getItem('username')
     }
   },
   computed: {
@@ -52,7 +51,7 @@ export default {
       this.$store.dispatch('app/toggleSideBar')
     },
     async logout() {
-      removeToken('username')
+      sessionStorage.removeItem('username')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     },
     imgLoadError() {

@@ -49,7 +49,6 @@
 </template>
 
 <script>
-import { setToken } from '@/utils/auth' // get token from cookie
 import { errorMessage } from '@/utils/message'
 
 export default {
@@ -95,7 +94,7 @@ export default {
           this.loading = true
           this.Axios.post('/auth/login', data).then((response) => {
             this.loading = false
-            setToken('username', response.data.username)
+            sessionStorage.setItem('username', response.data.username)
             global.avater = response.data.head_image
             this.$router.push({ path: '/' })
           }).catch((error) => {
