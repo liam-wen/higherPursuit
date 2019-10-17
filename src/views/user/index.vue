@@ -84,7 +84,6 @@ export default {
       })
     },
     getUserInfo() {
-      console.log(global)
       this.Axios.get(`/auth/userinfo?username=${getToken('username')}`, null).then((response) => {
         this.form = response.data
         global.head_image = response.data.head_image
@@ -99,10 +98,8 @@ export default {
       // 文件对象
       form.append('file', fileObj)
       form.append('username', getToken('username'))
-      console.log(this.Axios)
       this.Axios.post(`/auth/userinfo/headimage/update`, form).then((response) => {
         this.form.head_image = response.data.head_image
-        console.log(response)
       }).catch(function(error) {
         errorMessage(error.message)
       })

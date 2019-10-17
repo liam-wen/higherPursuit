@@ -1,6 +1,11 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">name: {{ name }}</div>
+    <el-card class="box-card" shadow="hover">
+      <div slot="header" class="clearfix">
+        <div class="title">欢迎</div>
+      </div>
+      <div>欢迎光临兴趣管理系统</div>
+    </el-card>
   </div>
 </template>
 
@@ -26,5 +31,13 @@ export default {
     font-size: 30px;
     line-height: 46px;
   }
+}
+.box-card{
+  width:400px;
+  margin:0 auto;
+}
+.title{
+  width:100%;
+  text-align: center
 }
 </style>
